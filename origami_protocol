@@ -336,7 +336,7 @@ def run(protocol: protocol_api.ProtocolContext):
     
     #Add DNA to heatdeck PCR tray in concentration 50 nM for oligos and 10 nM for scaffold 
     p20.transfer(total_rxn_vol/4, tuberack3.wells()[-1],tempplate.columns()[0:len(test_gradient)].wells()[0:replicates], #check if this works
-                 mix_after=(10, 20), 
+                 mix_after=(3, total_rxn_vol/4), 
                  touch_tip=False, blow_out=True,
                  blowout_location='destination well',
                  new_tip='always')
@@ -349,7 +349,7 @@ def run(protocol: protocol_api.ProtocolContext):
     protocol.comment('Incubating at 90˚C')
     protocol.delay(minutes = 20)
 
-      #Cooling
+    #Cooling
     tempdeck.set_temperature(4)
     protocol.comment('Incubating at 4˚C for 2 hours')
     protocol.delay(minutes = 120)
