@@ -65,13 +65,6 @@ mix_vol_single = total_rxn_vol/4
 mix_volume = mix_vol_single * len(test_gradient) * replicates
 mix_volume_rounded = math.ceil(mix_volume/100)*100
 
-#If mix volume is too big
-if mix_volume_rounded >= 1200:
-  mix_volume_rounded = math.ceil((mix_volume_rounded/2)/100)*100
-  mix_split = True
-else: 
-  mix_split = False 
-
 #scaffold concentration in final mix
 scaffold_in_mix = mix_volume_rounded/(scaffold_conc/40)
 
@@ -306,32 +299,7 @@ def run(protocol: protocol_api.ProtocolContext):
                 blowout_location='destination well',
                 new_tip='once')
     
-    
-    if mix_split == True: 
-      p300.transfer(pipette_step3, tuberack3.wells()[0:final_mix_second], tuberack3.wells()[-2], 
-                touch_tip=False,
-                blow_out=True,
-                blowout_location='destination well',
-                new_tip='always')   
-
-      if scaffold == True: #the way I have written it now there is a limit of 300 strands when there is a scaffold
-          p300.transfer((scaffold_in_mix), tuberack3.wells()[3], tuberack3.wells()[-2], #add scaffold to 40 nM #just a random location on tuberack3 for the scaffold
-                  touch_tip=False,
-                  blow_out=True,
-                  blowout_location='destination well',
-                  new_tip='once')
-
-          p300.transfer((mix_volume_rounded-pipette_step3*final_mix_third-scaffold_in_mix), reservoir.columns()[0], tuberack3.wells()[-2], #add buffer to 200 nM
-                  touch_tip=False,
-                  blow_out=True,
-                  blowout_location='destination well',
-                  new_tip='once') 
-      else: 
-          p300.transfer((mix_volume_rounded-pipette_step3*final_mix_third), reservoir.columns()[0], tuberack3.wells()[-1], #add buffer to 200 nM
-                  touch_tip=False,
-                  blow_out=True,
-                  blowout_location='destination well',
-                  new_tip='once')
+   
     #Final volume of mix is equal to 200 uL, could be increased, each strand in 200 nM
     
     #Add DNA to heatdeck PCR tray in concentration 50 nM for oligos and 10 nM for scaffold 
