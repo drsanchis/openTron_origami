@@ -322,9 +322,9 @@ def run(protocol: protocol_api.ProtocolContext):
                 blowout_location='destination well',
                 new_tip='once')
 
-	p300.pic_up_tip()
+	p300.pick_up_tip()
 	p300.mix(4, mix_volume_rounded/4, tuberack3.wells()[-1])
-  	p300.drop_tip()  
+	p300.drop_tip()  
    
     #Final volume of mix is equal to 200 uL, could be increased, each strand in 200 nM
     
