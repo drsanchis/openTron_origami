@@ -75,7 +75,7 @@ if salt_conc < max(test_gradient):
 	
 # Check if number of replicates is okay
 if replicates > 8:
-	print("Too many repliactes! We can't fit more than 8 replicates in a plate.")
+	print('Too many repliactes! We can't fit more than 8 replicates in a plate.')
 	sys.exit()
 	
 # Check mix volumes
@@ -231,19 +231,23 @@ def run(protocol: protocol_api.ProtocolContext):
                         blow_out=True,
                         blowout_location='destination well',
                         new_tip='always')
+	p300.mix(4, mix_volume_rounded/4, tuberack2.wells()[i])
     
     #final column  
     p300.transfer(pipette_step, tuberack.wells()[mixes*10:(mixes*10+final_mix)], tuberack2.wells()[mixes], 
                   touch_tip=False,
                   blow_out=True,
                   blowout_location='destination well',
-                  new_tip='always')  
+                  new_tip='always')
+	
     
     p300.transfer((mix_volume_rounded-pipette_step*final_mix), reservoir.columns()[0], tuberack2.wells()[mixes], #add buffer to 100 nM
                 touch_tip=False,
                 blow_out=True,
                 blowout_location='destination well',
                 new_tip='once') 
+	
+p300.mix(4, mix_volume_rounded/4, tuberack2.wells()[mixes])
     
     #Strands in 10 uM
     
@@ -258,6 +262,7 @@ def run(protocol: protocol_api.ProtocolContext):
                   blow_out=True,
                   blowout_location='destination well',
                   new_tip='always')
+	p300.mix(4, mix_volume_rounded/4, tuberack3.wells()[i])
     
     #final column  
     p300.transfer(pipette_step, tuberack2.wells()[mixes_second*10:(mixes_second*10+final_mix_second)], tuberack3.wells()[mixes_second], 
@@ -265,12 +270,15 @@ def run(protocol: protocol_api.ProtocolContext):
               blow_out=True,
               blowout_location='destination well',
               new_tip='always')  
-    
+
     p300.transfer((mix_volume_rounded-pipette_step*final_mix_second), reservoir.columns()[0], tuberack3.wells()[mixes_second], #add buffer to 100 nM
             touch_tip=False,
             blow_out=True,
             blowout_location='destination well',
             new_tip='once') 
+
+p300.mix(4, mix_volume_rounded/4, tuberack3.wells()[mixes_second])
+    
     
     #Strands in 1 uM
     
@@ -284,7 +292,8 @@ def run(protocol: protocol_api.ProtocolContext):
               touch_tip=False,
               blow_out=True,
               blowout_location='destination well',
-              new_tip='always')   
+              new_tip='always')  
+
     
     if scaffold == True: #the way I have written it now there is a limit of 300 strands when there is a scaffold
         p300.transfer((scaffold_in_mix), tuberack3.wells()[3], tuberack3.wells()[-1], #add scaffold to 40 nM #just a random location on tuberack3 for the scaffold
@@ -304,6 +313,8 @@ def run(protocol: protocol_api.ProtocolContext):
                 blow_out=True,
                 blowout_location='destination well',
                 new_tip='once')
+
+p300.mix(4, mix_volume_rounded/4, tuberack3.wells()[-1])
     
    
     #Final volume of mix is equal to 200 uL, could be increased, each strand in 200 nM
