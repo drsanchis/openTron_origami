@@ -72,6 +72,10 @@ scaffold_in_mix = mix_volume_rounded/(scaffold_conc/40)
 if salt_conc < max(test_gradient):
 	print('The concentration of the salt stock provided is too low to cover the gradient.')
 	sys.exit()
+	
+if replicates > 8:
+	print('Can't fit more than 8 replicates per condition in one plate! Please, reduce the number of replicates.')
+	sys.exit()
   
 
   
