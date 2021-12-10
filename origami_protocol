@@ -9,7 +9,7 @@ Created on Thu Dec  9 10:53:37 2021
 #---------------- Edit for each run ----------------
 
 # Amount of dry DNA indicated in the label of each oligo tube (nmol)
-oligos_nmol = (28.4, 31.3, 25.1, 24.3, 33.2, 40.2, 50.1)
+oligos_nmol = (28.4, 31.3, 25.1, 24.3, 33.2, 40.2, 50.1, 18.0, 43.6, 22.2, 24.6, 19.5, 32.7)
 
 # Desired concentration of resuspended oligos (uM)
 oligos_resusp_concentration = 100
