@@ -153,7 +153,7 @@ def run(protocol: protocol_api.ProtocolContext):
                           new_tip='never')
         elif x < 2:
             protocol.comment('You are trying to pipette too small a volume! Please note results from this may not be accurate')
-            p20.transfer(x, reservoir.columns()[0], tempplate.columns()[n],
+            p20.distribute(x, reservoir.columns()[0], tempplate.columns()[n],
                           touch_tip=False, blow_out=True,
                           new_tip='never')
     if min(buffer_in) > 20:
@@ -190,7 +190,7 @@ def run(protocol: protocol_api.ProtocolContext):
                           new_tip='never')
         elif x < 2:
             protocol.comment('You are trying to pipette too small a volume! Please note results from this may not be accurate')
-            p20.transfer(x, reservoir.columns()[1], tempplate.columns()[n],
+            p20.distribute(x, reservoir.columns()[1], tempplate.columns()[n],
                           touch_tip=False, blow_out=True,
                           new_tip='never')
     if min(salt_in) > 20:
