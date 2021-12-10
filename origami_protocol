@@ -75,7 +75,7 @@ if salt_conc < max(test_gradient):
 	
 # Check if number of replicates is okay
 if replicates > 8:
-	print('Too many repliactes! We can't fit more than 8 replicates in a plate.')
+	print("Too many repliactes! We can't fit more than 8 replicates in a plate.")
 	sys.exit()
 	
 # Check mix volumes
