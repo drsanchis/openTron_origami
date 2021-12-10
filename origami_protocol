@@ -72,8 +72,20 @@ scaffold_in_mix = mix_volume_rounded/(scaffold_conc/40)
 if salt_conc < max(test_gradient):
 	print('The concentration of the salt stock provided is too low to cover the gradient.')
 	sys.exit()
-  
-
+	
+# Check if number of replicates is okay
+if replicates > 8:
+	print('Too many repliactes! We can't fit more than 8 replicates in a plate.')
+	sys.exit()
+	
+# Check mix volumes
+if mix_volume_rounded > 1400:
+	print('Total mix volme is too high to be handled.')
+	sys.exit()
+	
+if mix_volume_rounded < 200:
+	print('Mix volume is too small to be handled.')
+	sys.exit()
   
 #-------------------TEST GRADIENT--------------------
 # Calculates how much of the stock solution to add to get the desired final conc, calc amount of buffer to make up to full rxn vol, returns as two lists
