@@ -143,77 +143,77 @@ def run(protocol: protocol_api.ProtocolContext):
     # Transferring Tris accross 96-well plate
     
     # It only picks up the tips that it's actually going to use to cover all the gradient.
-     if min(buffer_in) > 20:
-    	p300.pick_up_tip()
-
-    elif max(buffer_in) < 20:
-    	p20.pick_up_tip()
-
-    else:
-    	p300.pick_up_tip()
-    	p20.pick_up_tip()
-
-    for n, x in enumerate(buffer_in):
-        if x > 20:
-            p300.distribute(x, reservoir.columns()[0], tempplate.columns()[n].wells()[0:replicates],
-                          touch_tip=False, blow_out=True,
-                          new_tip='never')
-
-        elif x <= 20:
-            p20.distribute(x, reservoir.columns()[0], tempplate.columns()[n].wells()[0:replicates],
-                          touch_tip=False, blow_out=True,
-                          new_tip='never')
-        elif x < 2:
-            protocol.comment('You are trying to pipette too small a volume! Please note results from this may not be accurate')
-            p20.distribute(x, reservoir.columns()[0], tempplate.columns()[n].wells()[0:replicates],
-                          touch_tip=False, blow_out=True,
-                          new_tip='never')
     if min(buffer_in) > 20:
-    	p300.drop_tip()
-
-    elif max(buffer_in) < 20:
-    	p20.drop_tip()
-
-    else:
-    	p300.drop_tip()
-    	p20.drop_tip()
-
-
-    #Mg gradient from 0 to 22mM, 8 repeats (A-H)
-    if min(salt_in) > 20:
     	p300.pick_up_tip()
+		
+	elif max(buffer_in) < 20:
+		p20.pick_up_tip()
 
-    elif max(salt_in) < 20:
-    	p20.pick_up_tip()
+	else:
+		p300.pick_up_tip()
+		p20.pick_up_tip()
 
-    else:
-    	p300.pick_up_tip()
-    	p20.pick_up_tip()
+	for n, x in enumerate(buffer_in):
+		if x > 20:
+			p300.distribute(x, reservoir.columns()[0], tempplate.columns()[n][0:replicates],
+						  touch_tip=False, blow_out=True,
+						  new_tip='never')
 
-    for n, x in enumerate(salt_in):
-        if x > 20:
-            p300.distribute(x, reservoir.columns()[1], tempplate.columns()[n].wells()[0:replicates],
-                          touch_tip=False, blow_out=True,
-                          new_tip='never')
+		elif x <= 20:
+			p20.distribute(x, reservoir.columns()[0], tempplate.columns()[n][0:replicates],
+						  touch_tip=False, blow_out=True,
+						  new_tip='never')
+		elif x < 2:
+			protocol.comment('You are trying to pipette too small a volume! Please note results from this may not be accurate')
+			p20.distribute(x, reservoir.columns()[0], tempplate.columns()[n][0:replicates],
+						  touch_tip=False, blow_out=True,
+						  new_tip='never')
+	if min(buffer_in) > 20:
+		p300.drop_tip()
 
-        elif x <= 20:
-            p20.distribute(x, reservoir.columns()[1], tempplate.columns()[n].wells()[0:replicates],
-                          touch_tip=False, blow_out=True,
-                          new_tip='never')
-        elif x < 2:
-            protocol.comment('You are trying to pipette too small a volume! Please note results from this may not be accurate')
-            p20.distribute(x, reservoir.columns()[1], tempplate.columns()[n].wells()[0:replicates],
-                          touch_tip=False, blow_out=True,
-                          new_tip='never')
-    if min(salt_in) > 20:
-    	p300.drop_tip()
+	elif max(buffer_in) < 20:
+		p20.drop_tip()
 
-    elif max(salt_in) < 20:
-    	p20.drop_tip()
+	else:
+		p300.drop_tip()
+		p20.drop_tip()
 
-    else:
-    	p300.drop_tip()
-    	p20.drop_tip()
+
+	#Mg gradient from 0 to 22mM, 8 repeats (A-H)
+	if min(salt_in) > 20:
+		p300.pick_up_tip()
+
+	elif max(salt_in) < 20:
+		p20.pick_up_tip()
+
+	else:
+		p300.pick_up_tip()
+		p20.pick_up_tip()
+
+	for n, x in enumerate(salt_in):
+		if x > 20:
+			p300.distribute(x, reservoir.columns()[1], tempplate.columns()[n][0:replicates],
+						  touch_tip=False, blow_out=True,
+						  new_tip='never')
+
+		elif x <= 20:
+			p20.distribute(x, reservoir.columns()[1], tempplate.columns()[n][0:replicates],
+						  touch_tip=False, blow_out=True,
+						  new_tip='never')
+		elif x < 2:
+			protocol.comment('You are trying to pipette too small a volume! Please note results from this may not be accurate')
+			p20.distribute(x, reservoir.columns()[1], tempplate.columns()[n][0:replicates],
+						  touch_tip=False, blow_out=True,
+						  new_tip='never')
+	if min(salt_in) > 20:
+		p300.drop_tip()
+
+	elif max(salt_in) < 20:
+		p20.drop_tip()
+
+	else:
+		p300.drop_tip()
+		p20.drop_tip()
    
     #Step 3 - Mix components in correct amounts - onepot to 200 nM (now resuspended)
     no_mixtogether = 10 # It's the maximum number of oligos we can have in a sibgle tube. Assumption: we can number wells.
@@ -245,9 +245,9 @@ def run(protocol: protocol_api.ProtocolContext):
                 touch_tip=False,
                 blow_out=True,
                 blowout_location='destination well',
-                new_tip='once') 
-	
-p300.mix(4, mix_volume_rounded/4, tuberack2.wells()[mixes])
+                new_tip='once')
+		
+	p300.mix(4, mix_volume_rounded/4, tuberack2.wells()[mixes])
     
     #Strands in 10 uM
     
@@ -277,7 +277,7 @@ p300.mix(4, mix_volume_rounded/4, tuberack2.wells()[mixes])
             blowout_location='destination well',
             new_tip='once') 
 
-p300.mix(4, mix_volume_rounded/4, tuberack3.wells()[mixes_second])
+	p300.mix(4, mix_volume_rounded/4, tuberack3.wells()[mixes_second])
     
     
     #Strands in 1 uM
@@ -314,7 +314,7 @@ p300.mix(4, mix_volume_rounded/4, tuberack3.wells()[mixes_second])
                 blowout_location='destination well',
                 new_tip='once')
 
-p300.mix(4, mix_volume_rounded/4, tuberack3.wells()[-1])
+	p300.mix(4, mix_volume_rounded/4, tuberack3.wells()[-1])
     
    
     #Final volume of mix is equal to 200 uL, could be increased, each strand in 200 nM
