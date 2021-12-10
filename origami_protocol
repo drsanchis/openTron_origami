@@ -110,9 +110,8 @@ def run(protocol: protocol_api.ProtocolContext):
   
     #Define Labware
     #plate = protocol.load_labware('costar3370flatbottomtransparent_96_wellplate_200ul', 1)
-    tiprack_1 = protocol.load_labware('opentrons_96_tiprack_300ul', 8)
+    tiprack_1 = protocol.load_labware('opentrons_96_tiprack_300ul', 4)
     tiprack_2 = protocol.load_labware('opentrons_96_tiprack_20ul', 1)
-    tiprack_3 = protocol.load_labware('opentrons_96_tiprack_20ul', 4)
     reservoir = protocol.load_labware('4ti0131_12_reservoir_21000ul', 5)
     tempdeck = protocol.load_module('tempdeck', 10)
     tempplate = tempdeck.load_labware('opentrons_96_aluminumblock_biorad_wellplate_200ul', label='Temperature-Controlled Tubes')
@@ -329,7 +328,7 @@ def run(protocol: protocol_api.ProtocolContext):
     #Final volume of mix is equal to 200 uL, could be increased, each strand in 200 nM
     
     #Add DNA to heatdeck PCR tray in concentration 50 nM for oligos and 10 nM for scaffold 
-    p20.transfer(total_rxn_vol/4, tuberack3.wells()[-1],tempplate.columns()[0:len(test_gradient)].wells()[0:replicates], #check if this works
+    p20.transfer(total_rxn_vol/4, tuberack3.wells()[-1],tempplate.columns()[0:len(test_gradient)][0:replicates], #check if this works
                  mix_after=(3, total_rxn_vol/4), 
                  touch_tip=False, blow_out=True,
                  blowout_location='destination well',
